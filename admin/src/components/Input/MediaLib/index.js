@@ -27,7 +27,12 @@ const MediaLib = ({ isOpen, onChange, onToggle, editor, uploadConfig: { responsi
           newValue = `<a href="${prefixFileUrlWithBackendUrl(url)}" download="${name}">${name || 'Download PDF'}</a>`;
 
       }
-      // Handle videos and other type of files by adding some code
+      else if (mime.includes("video")) {
+
+        newValue = `<video controls><source src="${prefixFileUrlWithBackendUrl(url)}" type="${mime}"></video>`;
+        
+      }
+      // Handle other type of files by adding some code
     });
 
     const viewFragment = editor.data.processor.toView( newValue );
